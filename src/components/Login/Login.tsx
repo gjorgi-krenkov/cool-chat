@@ -7,8 +7,9 @@ const Login = (props: any) => {
     <div className="page centered">
       <div className="wrapper">
         <div className="wrapper-content ">
-          <h1>Login</h1>
+
           <div className="wrapper-main-content">
+          <h1>Login</h1>
             <Input
               labelText={"Username"}
               placeholder={"Username "}
@@ -21,7 +22,12 @@ const Login = (props: any) => {
               type={"password"}
               validInput={7 > 3}
             />
-            <Button valueText={"Login "} type={""} validInput={7 > 3} />
+            <Button onClick={props.handleLogin} valueText={"Login "} type={""} validInput={7 > 3} />
+          </div>
+          <div className="wrapper-secondary-content m-auto ml-2">
+            <h1>CoolChat</h1>
+          <Button labelText={"Don't have account?"} valueText={"Register "} type={""} validInput={7 > 3} />
+          <Button labelText={"Forgot your password?"} valueText={"Reset password "} type={""} validInput={7 > 3} />
           </div>
         </div>
       </div>

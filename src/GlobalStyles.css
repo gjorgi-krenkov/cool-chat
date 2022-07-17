@@ -1,18 +1,25 @@
 body{
     margin:0px;
 display: flex;
+background-color: #FFFFF3;
+opacity: 0.99;
+background-image:  linear-gradient(30deg, #ECEBF3 12%, transparent 12.5%, transparent 87%, #ECEBF3 87.5%, #ECEBF3), linear-gradient(150deg, #ECEBF3 12%, transparent 12.5%, transparent 87%, #ECEBF3 87.5%, #ECEBF3), linear-gradient(30deg, #ECEBF3 12%, transparent 12.5%, transparent 87%, #ECEBF3 87.5%, #ECEBF3), linear-gradient(150deg, #ECEBF3 12%, transparent 12.5%, transparent 87%, #ECEBF3 87.5%, #ECEBF3), linear-gradient(60deg, #ECEBF377 25%, transparent 25.5%, transparent 75%, #ECEBF377 75%, #ECEBF377), linear-gradient(60deg, #ECEBF377 25%, transparent 25.5%, transparent 75%, #ECEBF377 75%, #ECEBF377);
+background-size: 80px 140px;
+background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
 }
 
-h1{
+h1,h2,h3{
     color:white;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin:0.5rem;
+    
 }
 .page{
     display: flex;
     flex-direction: column;
-    background-image: linear-gradient(0deg, #F05691,#ED3179);
-    height: 100vh;
-    width: 100vw;
+    width:100vw;
+    
+  
 }
 .centered{
     display: flex;
@@ -24,33 +31,57 @@ h1{
     justify-content: center;
     
 }
+.m-auto{
+    margin:auto;
+}
+.ml-2{
+    margin-left: 2rem;
+}
 .wrapper{
+    margin-top:25vh;
+    margin-bottom: 25vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    width:min(900px,80%);
-    height:min(50%,550px);
+    width:min(800px,80%);
+    height:fit-content;
     background-color: #0e103d;
     border-radius: 0.5rem;
+    padding: 1rem 0rem;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;    
 }
 .wrapper-content{
-    height:100%;
+    height:fit-content;
     width:100%;
     display: flex;
-    flex-direction: column;
-    padding: min(5%,2rem) min(5%,3rem);
+    flex-direction: row;
+    padding: min(5%,1rem) min(5%,1rem);
     box-sizing: border-box;
 }
 .wrapper-main-content{
     display: flex;
     flex-direction: column;
-    width:min(60%,900px);
+    width:70%;
     box-sizing: border-box;
-    
+
 }
-@media only screen and (max-width: 768px) {
+.wrapper-secondary-content{
+    display: flex;
+    flex-direction: column;
+    width:30%;
+}
+@media only screen and (max-width: 1024px) {
     .wrapper-main-content {
-      width:90%;
+      width:100%;
+      
+    }
+    .wrapper-secondary-content{
+        display: none;
+    }
+  }
+  @media only screen and (max-width: 991px) {
+    .wrapper{
+        height:100%;
+    
     }
   }

@@ -5,7 +5,7 @@ const Input = (props: any)  =>
 {
     return (
         <>
-        <label>{props.labelText}</label>
+        {props.labelText?<label>{props.labelText}</label>:null}
         <input
             type={props.type}
             placeholder={props.placeholder}

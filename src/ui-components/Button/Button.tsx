@@ -12,6 +12,7 @@ const Button = (props: any) => {
             ? styles[props.type]
             : `${styles["invalid-input"]} ${styles[props.type]}`
         }
+        onClick={props.onClick}
       >
         {props.valueText}
       </button>

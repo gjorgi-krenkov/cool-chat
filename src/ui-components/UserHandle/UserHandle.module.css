@@ -1,0 +1,20 @@
+.wrapper{
+   
+    padding:0.3rem 1rem;
+    display: flex;
+    align-items: center;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+.wrapper:hover{
+    background-color: #080821;
+}
+.user-image{
+    background-color: green;
+    width:48px;
+    height:48px;
+    border-radius: 24px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
