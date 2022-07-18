@@ -18,3 +18,14 @@
     display: flex;
     justify-content: center;
 }
+.unread-number{
+    width:40px;
+    background-color: #E3B505;
+    color:black;
+    justify-content: center;
+    display: flex;
+    padding:0.25rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    border-bottom-left-radius: 0.1rem;
+}

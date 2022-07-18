@@ -1,17 +1,39 @@
-import React from "react"
-import styles from "./Message.module.css"
+import React from "react";
+import styles from "./Message.module.css";
 
-const Message = (props: any)  =>
-{
-    return (
-        <div className={styles['wrapper']}>
-            <div className={styles['user-image']}>
-                .
-            </div>
-            <div className={styles['content']}>
-                <span className={styles['message-text']}>Hello message that is pretty longgg.. that spans next row mby</span>
-            </div>
-        </div>
-    )
-}
+const Message = (props: any) => {
+  return (
+    <div
+      className={
+        props.messageType === "sent"
+          ? styles["wrapper-sent"]
+          : styles["wrapper"]
+      }
+    >
+      {props.messageType === "sent" ? null : (
+        <img
+          src={props.to_img}
+          alt={"bla"}
+          className={styles["user-image"]}
+        ></img>
+      )}
+      <div
+        className={`
+        ${
+          props.messageType === "sent"
+            ? styles["content-sent"]
+            : styles["content"]
+        }
+          ${
+            props.messageType === "sent"
+              ? styles["sent-message"]
+              : styles["received-message"]
+          }`}
+      >
+        <span className={styles["message-text"]}>{props.value}</span>
+      </div>
+      <span className={styles["message-time"]}>{props.time}</span>
+    </div>
+  );
+};
 export default Message;

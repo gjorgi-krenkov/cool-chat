@@ -1,17 +1,44 @@
-import React from "react"
-import styles from "./Input.module.css"
+import React, { LegacyRef, Ref, RefObject, useImperativeHandle } from "react";
 
-const Input = (props: any)  =>
-{
+import styles from "./Input.module.css"; //I better use classes here :/
+
+type Props = {
+  onChange(event: React.ChangeEvent<HTMLInputElement>): void;
+  labelText?: string;
+  type: string;
+  validInput: boolean;
+  style?: React.CSSProperties;
+  children?: React.ReactNode;
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "type" | "onChange">;
+
+const Input: React.FunctionComponent<Props> = React.forwardRef<
+  HTMLInputElement,
+  Props
+>(
+  (
+    { labelText, style, onChange, type, placeholder, validInput, value, id },
+    ref
+  ) => {
     return (
-        <>
-        {props.labelText?<label>{props.labelText}</label>:null}
+      <>
+        {labelText ? <label>{labelText}</label> : null}
         <input
-            type={props.type}
-            placeholder={props.placeholder}
-            className = {props.validInput ? styles[props.type] : `${styles['invalid-input']} ${styles[props.type]}`}
+          style={style}
+          type={type}
+          placeholder={placeholder}
+          ref={ref}
+          className={
+            validInput
+              ? styles[type]
+              : `${styles["invalid-input"]} ${styles[type]}`
+          }
+          value={value}
+          onChange={onChange}
+          id={id}
         />
-        </>
-    )
-}
+      </>
+    );
+  }
+);
+
 export default Input;
