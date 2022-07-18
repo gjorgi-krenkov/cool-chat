@@ -11,13 +11,11 @@ type Props = {
   children?: React.ReactNode;
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, "type" | "onChange">;
 
-const Input: React.FunctionComponent<Props> = React.forwardRef<
-  HTMLInputElement,
-  Props
->(
+const Input: React.FunctionComponent<Props & RefObject<HTMLInputElement> & any> = React.forwardRef //hack have to search these types way better
+(
   (
-    { labelText, style, onChange, type, placeholder, validInput, value, id },
-    ref
+    { labelText, style, onChange, type, placeholder, validInput, value, id } ,ref:Ref<HTMLInputElement>,
+    
   ) => {
     return (
       <>

@@ -28,7 +28,7 @@ const FriendsPanel = (props: any) => {
         />
         <Button
           onClick={authCtx.onLogout}
-          valueText={"Logout"}
+          valueText={"Log out"}
           type={"button"}
           validInput={7 > 3}
         />

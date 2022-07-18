@@ -13,7 +13,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    
+
   
 }
 .header{
@@ -21,24 +21,27 @@
     box-shadow:white;
     -webkit-box-shadow: 0px 2px 1px 0px #202083;
     -moz-box-shadow: 0px 2px 1px 0px #202083;
-    box-shadow: 0px 2px 1px 0px #202083;
-
+    box-shadow: 0px 2px 2px 0px #202083;
+    z-index: 1;
 }
 .messages{
-    
-    overflow-y: scroll;
+    overflow:scroll;
     width: 100%;
     display: flex;
     flex-direction: column;
-    max-height: 100%;
+
     justify-content: flex-end; 
+
+  
 }
 .wrapper{
     
     position: relative;
     display: flex;
+    overflow-y: scroll;
     height: 100%;
- 
+    width:100%;
+    overflow: scroll;
 }
 .chat-input{
     display: flex;

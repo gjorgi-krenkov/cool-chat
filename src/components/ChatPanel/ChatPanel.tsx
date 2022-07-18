@@ -1,4 +1,4 @@
-import React, { useTransition } from "react";
+import React, { useEffect, useState, useTransition } from "react";
 import AuthContext from "../../store/auth-store";
 import UserType from "../../types/UserType";
 import Input from "../../ui-components/Input/Input";
@@ -71,18 +71,27 @@ const ChatPanel = (props: any) => {
       : messagesNikola2;
 
   const chatInputRef = React.useRef<HTMLInputElement>(null);
+
+  const [cnt,updateCnt] = useState(0);
   const handleSubmit = (e: any) => {
     e.preventDefault();
     if (userFrom && chatInputRef.current) {
+      if(chatInputRef.current.value.length===0) return;
+      const d =new Date(Date.now())
       const newMessage: MessageType = {
         from_id: userFrom.id,
         value: chatInputRef.current.value,
-        time: "4:00",
+        time: `${d.getHours()}:${d.getMinutes()}`,
         day: "18/7/2022",
       };
       messages.push(newMessage);
+      chatInputRef.current.value = ""
     }
+    updateCnt(cnt+1)
+   
   };
+
+
   return (
     <div className={styles["main-wrapper"]}>
       <div className={styles["content"]}>
