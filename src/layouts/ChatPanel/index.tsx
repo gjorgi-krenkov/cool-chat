@@ -1,4 +1,5 @@
 import React, { FormEvent, useState } from "react";
+
 import AuthContext from "../../store/auth-store";
 import ChatContext from "../../store/chat-store";
 import Input from "../../ui-components/Input";
@@ -58,7 +59,11 @@ const ChatPanel = (props: any) => {
   const userFrom = React.useContext(AuthContext).user;
   const userTo = React.useContext(ChatContext).userTo;
   const messages =
-    userTo === null ? [] : userTo.id === 1 ? messagesNikola : messagesNikola2;
+    userTo === undefined
+      ? []
+      : userTo.id === 1
+      ? messagesNikola
+      : messagesNikola2;
 
   const chatInputRef = React.useRef<HTMLInputElement>(null);
 
@@ -91,8 +96,10 @@ const ChatPanel = (props: any) => {
           <>
             <div className={styles["header"]}>
               <UserHandle
-                img={userTo ? userTo.img_url : null}
-                handle={userTo ? userTo.username : null}
+                id={userTo.id}
+                is_active={userTo.is_active}
+                img_url={userTo.img_url}
+                handle={userTo.handle}
               />
             </div>
             <div className={styles["wrapper"]}>

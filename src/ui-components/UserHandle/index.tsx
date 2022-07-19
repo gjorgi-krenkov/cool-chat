@@ -1,26 +1,34 @@
 import React, { useContext } from "react";
 
 import ChatContext from "../../store/chat-store";
-import styles from "./UserHandle.module.css";
+import UserType from "../../types/UserType";
+import classes from "./UserHandle.module.css";
 
-const UserHandle = (props: any) => {
+type UserHandleProps = UserType & {
+  onClick?: () => void;
+  unread?: number;
+};
+
+const UserHandle: React.FunctionComponent<UserHandleProps> = ({
+  id,
+  unread,
+  handle,
+  img_url,
+  onClick,
+}) => {
   const userTo = useContext(ChatContext).userTo;
 
   return (
     <div
-      onClick={props.onClick}
+      onClick={onClick}
       className={
-        userTo?.id === props.id ? styles["wrapper-selected"] : styles["wrapper"]
+        userTo?.id === id ? classes["wrapper-selected"] : classes["wrapper"]
       }
     >
-      <img
-        src={props.img}
-        alt={"Smthn wung"}
-        className={styles["user-image"]}
-      />
-      <h3>{props.handle}</h3>
-      {props.unread !== undefined && props.unread < 10 ? (
-        <div className={styles["unread-number"]}>{props.unread}</div>
+      <img src={img_url} alt={"Smthn wung"} className={classes["user-image"]} />
+      <h3>{handle}</h3>
+      {unread !== undefined && unread < 10 ? (
+        <div className={classes["unread-number"]}>{unread}</div>
       ) : null}
     </div>
   );

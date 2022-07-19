@@ -3,7 +3,7 @@ import AuthContext from "../../store/auth-store";
 import Button from "../../ui-components/Button";
 import Input from "../../ui-components/Input";
 
-const Login = (props: any) => {
+const Login = () => {
   const [username, updateUsername] = useState<string>("");
   const [password, updatePassword] = useState<string>("");
   const authCtx = React.useContext(AuthContext);
@@ -52,21 +52,28 @@ const Login = (props: any) => {
               value={password}
               onChange={handleChange}
             />
-            <Button valueText={"Login "} type={"submit"} validInput={7 > 3} />
+            <Button
+              onClick={() => {}}
+              valueText={"Login "}
+              type={"submit"}
+              validInput={7 > 3}
+            />
           </form>
           <div className="wrapper-secondary-content m-auto ml-2">
             <h1>CoolChat</h1>
             <Button
               labelText={"Don't have account?"}
               valueText={"Register "}
-              type={""}
+              type={"button"}
               validInput={7 > 3}
+              onClick={() => {}}
             />
             <Button
               labelText={"Forgot your password?"}
               valueText={"Reset password "}
-              type={""}
+              type={"button"}
               validInput={7 > 3}
+              onClick={() => {}}
             />
           </div>
         </div>

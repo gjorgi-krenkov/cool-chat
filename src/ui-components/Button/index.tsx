@@ -1,20 +1,34 @@
 import React from "react";
 import styles from "./Button.module.css";
 
-const Button = (props: any) => {
+type ButtonProps = {
+  labelText?: string;
+  type?: "button" | "submit" | "reset" | undefined;
+  validInput?: boolean | (() => boolean);
+  onClick: () => void;
+  valueText: string;
+};
+
+const Button: React.FunctionComponent<ButtonProps> = ({
+  labelText,
+  type,
+  validInput,
+  onClick,
+  valueText,
+}) => {
   return (
     <>
-      <label>{props.labelText}</label>
+      <label>{labelText}</label>
       <button
-        type={props.type}
+        type={type}
         className={
-          props.validInput
-            ? styles[props.type]
-            : `${styles["invalid-input"]} ${styles[props.type]}`
+          validInput
+            ? styles[String(type)]
+            : `${styles["invalid-input"]} ${styles[String(type)]}`
         }
-        onClick={props.onClick}
+        onClick={onClick}
       >
-        {props.valueText}
+        {valueText}
       </button>
     </>
   );

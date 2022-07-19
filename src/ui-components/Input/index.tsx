@@ -1,8 +1,8 @@
 import React from "react";
 
-import styles from "./Input.module.css"; //I better use classes here :/
+import classes from "./Input.module.css"; //I better use classes here :/
 
-type Props = {
+type InputProps = {
   onChange(event: React.ChangeEvent<HTMLInputElement>): void;
   labelText?: string;
   type: string;
@@ -10,7 +10,7 @@ type Props = {
   style?: React.CSSProperties;
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, "type" | "onChange">;
 
-const Input = React.forwardRef<HTMLInputElement, Props>(
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
     { labelText, style, onChange, type, placeholder, validInput, value, id },
     ref
@@ -25,8 +25,8 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
           ref={ref}
           className={
             validInput
-              ? styles[type]
-              : `${styles["invalid-input"]} ${styles[type]}`
+              ? classes[type]
+              : `${classes["invalid-input"]} ${classes[type]}`
           }
           value={value}
           onChange={onChange}

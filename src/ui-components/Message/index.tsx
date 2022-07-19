@@ -1,38 +1,39 @@
 import React from "react";
-import styles from "./Message.module.css";
+
+import classes from "./Message.module.css";
 
 const Message = (props: any) => {
   return (
     <div
       className={
         props.messageType === "sent"
-          ? styles["wrapper-sent"]
-          : styles["wrapper"]
+          ? classes["wrapper-sent"]
+          : classes["wrapper"]
       }
     >
       {props.messageType === "sent" ? null : (
         <img
           src={props.to_img}
           alt={"bla"}
-          className={styles["user-image"]}
+          className={classes["user-image"]}
         ></img>
       )}
       <div
         className={`
         ${
           props.messageType === "sent"
-            ? styles["content-sent"]
-            : styles["content"]
+            ? classes["content-sent"]
+            : classes["content"]
         }
           ${
             props.messageType === "sent"
-              ? styles["sent-message"]
-              : styles["received-message"]
+              ? classes["sent-message"]
+              : classes["received-message"]
           }`}
       >
-        <span className={styles["message-text"]}>{props.value}</span>
+        <span className={classes["message-text"]}>{props.value}</span>
       </div>
-      <span className={styles["message-time"]}>{props.time}</span>
+      <span className={classes["message-time"]}>{props.time}</span>
     </div>
   );
 };

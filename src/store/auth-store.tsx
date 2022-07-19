@@ -1,55 +1,53 @@
-import React, { useState } from "react";
+import React, { FunctionComponent, useState } from "react";
+
 import UserType from "../types/UserType";
 
-interface contextDef {
-  user: UserType | null;
+interface IAuthContext {
+  user: UserType | undefined;
   onLogout: () => void;
   onLogin: (username: string, password: string) => void;
 }
 
-const AuthContext = React.createContext({
-  user: localStorage.getItem("logindata"),
+const AuthContext = React.createContext<IAuthContext>({
+  user: undefined,
   onLogout: () => {},
-  onLogin: (username: string, passowrd: string) => {},
-} as contextDef);
+  onLogin: (username: string, password: string) => {},
+});
 
-export const AuthContextProvider = (props: any) => {
-  const [user, setUser] = useState<UserType | null>(null);
+type AuthContextProps = {
+  children: React.ReactNode;
+};
+export const AuthContextProvider: FunctionComponent<AuthContextProps> = ({
+  children,
+}) => {
+  const [user, setUser] = useState<UserType>();
 
   const onLogoutHandler = () => {
-    setUser(null);
+    setUser(undefined);
     localStorage.removeItem("logindata");
   };
   const onLoginHandler = (username: string, password: string) => {
-    setUser({
+    const userToAdd: UserType = {
       id: 0,
-      username: username,
+      handle: username,
       is_active: true,
       img_url:
         "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8bWFsZXxlbnwwfHwwfHw%3D&w=1000&q=80",
-    });
-    localStorage.setItem(
-      "logindata",
-      JSON.stringify({
-        id: 0,
-        username: username,
-        is_active: true,
-        img_url:
-          "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8bWFsZXxlbnwwfHwwfHw%3D&w=1000&q=80",
-      })
-    );
+    };
+    setUser(userToAdd);
+    localStorage.setItem("logindata", JSON.stringify(userToAdd));
   };
   React.useEffect(() => {
-    const a = localStorage.getItem("logindata");
-    if (a) {
-      setUser(JSON.parse(a));
+    const previouslyLoggedIn = localStorage.getItem("logindata");
+    if (previouslyLoggedIn) {
+      setUser(JSON.parse(previouslyLoggedIn));
     }
   }, []);
   return (
     <AuthContext.Provider
       value={{ user: user, onLogout: onLogoutHandler, onLogin: onLoginHandler }}
     >
-      {props.children}
+      {children}
     </AuthContext.Provider>
   );
 };
