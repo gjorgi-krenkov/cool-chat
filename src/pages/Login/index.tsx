@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AuthContext from "../../store/auth-store";
 import Button from "../../ui-components/Button/Button";
-import Input from "../../ui-components/Input/Input";
+import Input from "../../ui-components/Input";
 
 const Login = (props: any) => {
   const [username, updateUsername] = useState<string>("");

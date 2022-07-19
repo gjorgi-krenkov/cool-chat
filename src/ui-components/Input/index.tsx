@@ -1,4 +1,4 @@
-import React, { LegacyRef, Ref, RefObject, useImperativeHandle } from "react";
+import React from "react";
 
 import styles from "./Input.module.css"; //I better use classes here :/
 
@@ -8,14 +8,12 @@ type Props = {
   type: string;
   validInput: boolean;
   style?: React.CSSProperties;
-  children?: React.ReactNode;
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, "type" | "onChange">;
 
-const Input: React.FunctionComponent<Props & RefObject<HTMLInputElement> & any> = React.forwardRef //hack have to search these types way better
-(
+const Input = React.forwardRef<HTMLInputElement, Props>(
   (
-    { labelText, style, onChange, type, placeholder, validInput, value, id } ,ref:Ref<HTMLInputElement>,
-    
+    { labelText, style, onChange, type, placeholder, validInput, value, id },
+    ref
   ) => {
     return (
       <>

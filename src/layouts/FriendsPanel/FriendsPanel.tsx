@@ -1,4 +1,5 @@
 import React from "react";
+import { useFriendsStatus } from "../../hooks/useFriendsStatus";
 import AuthContext from "../../store/auth-store";
 import Button from "../../ui-components/Button/Button";
 import UserHandle from "../../ui-components/UserHandle/UserHandle";
@@ -7,17 +8,18 @@ import styles from "./FriendsPanel.module.css";
 
 const FriendsPanel = (props: any) => {
   const authCtx = React.useContext(AuthContext);
+  const { activeFriends, offlineFriends } = useFriendsStatus();
   return (
     <div className={styles["main-wrapper"]}>
       <div className={styles["content"]}>
         <UserList
           onHandleClick={props.onHandleClick}
-          users={props.activeUsers}
+          users={activeFriends}
           type={"Active"}
         />
         <UserList
           onHandleClick={props.onHandleClick}
-          users={props.offlineUsers}
+          users={offlineFriends}
           type={"Offline"}
         />
       </div>
