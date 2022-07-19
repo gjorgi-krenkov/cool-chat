@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
+
+import ChatContext from "../../store/chat-store";
 import styles from "./UserHandle.module.css";
 
 const UserHandle = (props: any) => {
+  const userTo = useContext(ChatContext).userTo;
+
   return (
-    <div onClick={props.onClick} className={styles["wrapper"]}>
+    <div
+      onClick={props.onClick}
+      className={
+        userTo?.id === props.id ? styles["wrapper-selected"] : styles["wrapper"]
+      }
+    >
       <img
         src={props.img}
         alt={"Smthn wung"}

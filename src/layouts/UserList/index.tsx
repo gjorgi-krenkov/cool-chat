@@ -1,9 +1,12 @@
 import React from "react";
+
+import ChatContext from "../../store/chat-store";
 import UserType from "../../types/UserType";
-import UserHandle from "../../ui-components/UserHandle/UserHandle";
+import UserHandle from "../../ui-components/UserHandle";
 import styles from "./UserList.module.css";
 
 const UserList = (props: any) => {
+  const chatContext = React.useContext(ChatContext);
   return (
     <div>
       <h2 className={styles["list-title"]}>{props.type} Users</h2>
@@ -13,11 +16,12 @@ const UserList = (props: any) => {
           return (
             <UserHandle
               onClick={() => {
-                props.onHandleClick(user);
+                chatContext.onHandleClick(user);
               }}
               handle={user.username}
               img={user.img_url}
               key={user.id}
+              id={user.id}
               unread={unread}
             />
           );

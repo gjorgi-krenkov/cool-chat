@@ -1,8 +1,9 @@
 import React, { FormEvent, useState } from "react";
 import AuthContext from "../../store/auth-store";
+import ChatContext from "../../store/chat-store";
 import Input from "../../ui-components/Input";
-import Message from "../../ui-components/Message/Message";
-import UserHandle from "../../ui-components/UserHandle/UserHandle";
+import Message from "../../ui-components/Message";
+import UserHandle from "../../ui-components/UserHandle";
 import styles from "./ChatPanel.module.css";
 
 type MessageType = {
@@ -55,12 +56,9 @@ const messagesNikola2: MessageType[] = [
 
 const ChatPanel = (props: any) => {
   const userFrom = React.useContext(AuthContext).user;
+  const userTo = React.useContext(ChatContext).userTo;
   const messages =
-    props.userTo === null
-      ? []
-      : props.userTo.id === 1
-      ? messagesNikola
-      : messagesNikola2;
+    userTo === null ? [] : userTo.id === 1 ? messagesNikola : messagesNikola2;
 
   const chatInputRef = React.useRef<HTMLInputElement>(null);
 
@@ -82,15 +80,19 @@ const ChatPanel = (props: any) => {
     updateCnt(cnt + 1);
   };
 
+  React.useEffect(() => {
+    chatInputRef.current?.focus();
+  }, [userTo]);
+
   return (
     <div className={styles["main-wrapper"]}>
       <div className={styles["content"]}>
-        {props.userTo ? (
+        {userTo ? (
           <>
             <div className={styles["header"]}>
               <UserHandle
-                img={props.userTo ? props.userTo.img_url : null}
-                handle={props.userTo ? props.userTo.username : null}
+                img={userTo ? userTo.img_url : null}
+                handle={userTo ? userTo.username : null}
               />
             </div>
             <div className={styles["wrapper"]}>
@@ -103,8 +105,14 @@ const ChatPanel = (props: any) => {
                         userFrom?.id === message.from_id ? "sent" : "received"
                       }
                       value={message.value}
-                      to_img={props.userTo.img_url}
-                      time={message.time}
+                      to_img={userTo.img_url}
+                      time={
+                        message.time.split(":")[1].length - 1
+                          ? message.time
+                          : message.time.split(":")[0] +
+                            ":0" +
+                            message.time.split(":")[1]
+                      }
                     />
                   ))}
                 </div>
