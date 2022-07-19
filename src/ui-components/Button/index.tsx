@@ -1,5 +1,6 @@
 import React from "react";
-import styles from "./Button.module.css";
+
+import classes from "./Button.module.css";
 
 type ButtonProps = {
   labelText?: string;
@@ -23,8 +24,8 @@ const Button: React.FunctionComponent<ButtonProps> = ({
         type={type}
         className={
           validInput
-            ? styles[String(type)]
-            : `${styles["invalid-input"]} ${styles[String(type)]}`
+            ? classes[String(type)]
+            : `${classes["invalid-input"]} ${classes[String(type)]}`
         }
         onClick={onClick}
       >

@@ -1,6 +1,7 @@
 import React, { ReactNode, useState } from "react";
 
-import UserType from "../types/UserType";
+import UserType from "../types/User";
+import {LAST_CHAT_COOKIE_KEY} from "../config/default"
 
 interface IChatContext {
   userTo: UserType | undefined;
@@ -19,15 +20,15 @@ export const ChatContextProvider = ({ children }: ChatContextProps) => {
   const [userTo, setUserTo] = useState<UserType>();
 
   React.useEffect(() => {
-    const a = localStorage.getItem("lastuser");
-    if (a) {
-      setUserTo(JSON.parse(a));
+    const lastOpenedChatInPreviousSession = localStorage.getItem(LAST_CHAT_COOKIE_KEY);
+    if (lastOpenedChatInPreviousSession) {
+      setUserTo(JSON.parse(lastOpenedChatInPreviousSession));
     }
   }, []);
 
   const handleUserChange = (u: UserType) => {
     setUserTo(u);
-    localStorage.setItem("lastuser", JSON.stringify(u));
+    localStorage.setItem(LAST_CHAT_COOKIE_KEY, JSON.stringify(u));
   };
 
   return (

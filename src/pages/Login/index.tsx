@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import AuthContext from "../../store/auth-store";
 import Button from "../../ui-components/Button";
 import Input from "../../ui-components/Input";
@@ -6,7 +7,9 @@ import Input from "../../ui-components/Input";
 const Login = () => {
   const [username, updateUsername] = useState<string>("");
   const [password, updatePassword] = useState<string>("");
+
   const authCtx = React.useContext(AuthContext);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputFor = e.target.id;
     switch (inputFor) {
@@ -24,10 +27,8 @@ const Login = () => {
         <div className="wrapper-content ">
           <form
             onSubmit={(e) => {
-              console.log("**");
               e.preventDefault();
               if (username.trim() === "admin" && password.trim() === "admin") {
-                console.log("***");
                 authCtx.onLogin(username.trim(), password.trim());
               }
             }}

@@ -2,58 +2,14 @@ import React, { FormEvent, useState } from "react";
 
 import AuthContext from "../../store/auth-store";
 import ChatContext from "../../store/chat-store";
+import MessageType from "../../types/MessageType";
 import Input from "../../ui-components/Input";
 import Message from "../../ui-components/Message";
 import UserHandle from "../../ui-components/UserHandle";
-import styles from "./ChatPanel.module.css";
+import classes from "./ChatPanel.module.css";
 
-type MessageType = {
-  from_id: number;
-  value: string;
-  time: string;
-  day: string;
-};
-const messagesNikola: MessageType[] = [
-  //Nikola - admin ili admin - Nikola ;p
-  {
-    from_id: 1, // Nikola
-    value: "Nekoja poraka prethodno napishana od Nikola",
-    //sent_date
-    time: "3:15",
-    day: "8/7/2022",
-  },
-  {
-    from_id: 0, // admin
-    value: "Nekoja poraka prethodno napishana od admin",
-    //sent_date
-    time: "3:16",
-    day: "8/7/2022",
-  },
-  {
-    from_id: 1, // Nikola
-    value: "Nekoja poraka prethodno napishana od Nikola",
-    //sent_date
-    time: "3:15",
-    day: "8/7/2022",
-  },
-];
-const messagesNikola2: MessageType[] = [
-  //Nikola - admin ili admin - Nikola ;p
-  {
-    from_id: 2, // Nikola
-    value: "Nekoja poraka prethodno napishana od Nikola2",
-    //sent_date
-    time: "3:16",
-    day: "8/7/2022",
-  },
-  {
-    from_id: 0, // admin
-    value: "Nekoja poraka prethodno napishana od admin",
-    //sent_date
-    time: "3:17",
-    day: "8/7/2022",
-  },
-];
+import {messagesNikola,messagesNikola2} from "../../fake-data/messages"
+
 
 const ChatPanel = (props: any) => {
   const userFrom = React.useContext(AuthContext).user;
@@ -67,7 +23,7 @@ const ChatPanel = (props: any) => {
 
   const chatInputRef = React.useRef<HTMLInputElement>(null);
 
-  const [cnt, updateCnt] = useState(0);
+  const [cnt, updateCnt] = useState(0); //random state change to reevalute until full implementation
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (userFrom && chatInputRef.current) {
@@ -90,11 +46,11 @@ const ChatPanel = (props: any) => {
   }, [userTo]);
 
   return (
-    <div className={styles["main-wrapper"]}>
-      <div className={styles["content"]}>
+    <div className={classes["main-wrapper"]}>
+      <div className={classes["content"]}>
         {userTo ? (
           <>
-            <div className={styles["header"]}>
+            <div className={classes["header"]}>
               <UserHandle
                 id={userTo.id}
                 is_active={userTo.is_active}
@@ -102,9 +58,9 @@ const ChatPanel = (props: any) => {
                 handle={userTo.handle}
               />
             </div>
-            <div className={styles["wrapper"]}>
-              <div className={styles["block-container"]}>
-                <div className={styles["messages"]}>
+            <div className={classes["wrapper"]}>
+              <div className={classes["block-container"]}>
+                <div className={classes["messages"]}>
                   {messages.map((message: MessageType, index) => (
                     <Message
                       key={index}
@@ -125,7 +81,7 @@ const ChatPanel = (props: any) => {
                 </div>
               </div>
             </div>
-            <form onSubmit={handleSubmit} className={styles["chat-input"]}>
+            <form onSubmit={handleSubmit} className={classes["chat-input"]}>
               <Input
                 onChange={() => {}}
                 style={{ width: "100%", backgroundColor: "#020412" }}

@@ -1,7 +1,7 @@
 import React from "react";
-import UserType from "../types/UserType";
+import User from "../types/User";
 
-const friendsJSON: UserType[] = [
+const friendsJSON: User[] = [
   {
     id: 1,
     handle: "Nikola",
@@ -19,13 +19,13 @@ const friendsJSON: UserType[] = [
 ];
 
 export const useFriendsStatus = () => {
-  const [activeFriends, updateActiveFriends] = React.useState<UserType[]>([]);
-  const [offlineFriends, updateOfflineFriends] = React.useState<UserType[]>([]);
+  const [activeFriends, updateActiveFriends] = React.useState<User[]>([]);
+  const [offlineFriends, updateOfflineFriends] = React.useState<User[]>([]);
   React.useEffect(() => {
-    const activeUsers: UserType[] = [];
-    const offlineUsers: UserType[] = [];
+    const activeUsers: User[] = [];
+    const offlineUsers: User[] = [];
 
-    friendsJSON.forEach((user: UserType) => {
+    friendsJSON.forEach((user: User) => {
       if (user.is_active) activeUsers.push(user);
       if (!user.is_active) offlineUsers.push(user);
 

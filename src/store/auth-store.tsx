@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useState } from "react";
 
-import UserType from "../types/UserType";
+import UserType from "../types/User";
+import {LOGIN_STORE_COOKIE_KEY} from "../config/default"
 
 interface IAuthContext {
   user: UserType | undefined;
@@ -24,7 +25,7 @@ export const AuthContextProvider: FunctionComponent<AuthContextProps> = ({
 
   const onLogoutHandler = () => {
     setUser(undefined);
-    localStorage.removeItem("logindata");
+    localStorage.removeItem(LOGIN_STORE_COOKIE_KEY);
   };
   const onLoginHandler = (username: string, password: string) => {
     const userToAdd: UserType = {
@@ -35,10 +36,10 @@ export const AuthContextProvider: FunctionComponent<AuthContextProps> = ({
         "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8bWFsZXxlbnwwfHwwfHw%3D&w=1000&q=80",
     };
     setUser(userToAdd);
-    localStorage.setItem("logindata", JSON.stringify(userToAdd));
+    localStorage.setItem(LOGIN_STORE_COOKIE_KEY, JSON.stringify(userToAdd));
   };
   React.useEffect(() => {
-    const previouslyLoggedIn = localStorage.getItem("logindata");
+    const previouslyLoggedIn = localStorage.getItem(LOGIN_STORE_COOKIE_KEY);
     if (previouslyLoggedIn) {
       setUser(JSON.parse(previouslyLoggedIn));
     }

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 
 import ChatContext from "../../store/chat-store";
-import UserType from "../../types/UserType";
+import UserType from "../../types/User";
 import classes from "./UserHandle.module.css";
 
 type UserHandleProps = UserType & {

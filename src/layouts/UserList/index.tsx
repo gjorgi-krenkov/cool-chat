@@ -1,9 +1,8 @@
 import React, { FunctionComponent } from "react";
 
 import ChatContext from "../../store/chat-store";
-import UserType from "../../types/UserType";
+import UserType from "../../types/User";
 import UserHandle from "../../ui-components/UserHandle";
-
 import classes from "./UserList.module.css";
 
 type UserListProps = {
