@@ -12,14 +12,15 @@ type UserListProps = {
 
 const UserList: FunctionComponent<UserListProps> = ({ users, type }) => {
   const chatContext = React.useContext(ChatContext);
+  const unreadMessagesCount: number[] = React.useMemo(
+    () => users.map(() => Number.parseInt(String((Math.random() * 100) / 2))),
+    [users]
+  );
   return (
     <div>
       <h2 className={classes["list-title"]}>{type} Users</h2>
       <div className={classes["list"]}>
-        {users.map((user: UserType) => {
-          const unreadMessagesCount = Number.parseInt(
-            String((Math.random() * 100) / 2)
-          );
+        {users.map((user: UserType, index: number) => {
           return (
             <UserHandle
               onClick={() => {
@@ -29,7 +30,7 @@ const UserList: FunctionComponent<UserListProps> = ({ users, type }) => {
               img_url={user.img_url}
               key={user.id}
               id={user.id}
-              unread={unreadMessagesCount}
+              unread={unreadMessagesCount[index]}
               is_active={user.is_active}
             />
           );
