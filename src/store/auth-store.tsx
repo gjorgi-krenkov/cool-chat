@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from "react";
 
 import UserType from "../types/User";
-import {LOGIN_STORE_COOKIE_KEY} from "../config/default"
+import { LOGIN_STORE_COOKIE_KEY } from "../config/default";
 
 interface IAuthContext {
   user: UserType | undefined;
@@ -38,12 +38,14 @@ export const AuthContextProvider: FunctionComponent<AuthContextProps> = ({
     setUser(userToAdd);
     localStorage.setItem(LOGIN_STORE_COOKIE_KEY, JSON.stringify(userToAdd));
   };
+
+  const previouslyLoggedIn = localStorage.getItem(LOGIN_STORE_COOKIE_KEY);
+
   React.useEffect(() => {
-    const previouslyLoggedIn = localStorage.getItem(LOGIN_STORE_COOKIE_KEY);
     if (previouslyLoggedIn) {
       setUser(JSON.parse(previouslyLoggedIn));
     }
-  }, []);
+  }, [previouslyLoggedIn]);
   return (
     <AuthContext.Provider
       value={{ user: user, onLogout: onLogoutHandler, onLogin: onLoginHandler }}
