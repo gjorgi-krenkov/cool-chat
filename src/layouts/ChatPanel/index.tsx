@@ -8,8 +8,7 @@ import Message from "../../ui-components/Message";
 import UserHandle from "../../ui-components/UserHandle";
 import classes from "./ChatPanel.module.css";
 
-import {messagesNikola,messagesNikola2} from "../../fake-data/messages"
-
+import { messagesNikola, messagesNikola2 } from "../../fake-data/messages";
 
 const ChatPanel = (props: any) => {
   const userFrom = React.useContext(AuthContext).user;
@@ -52,7 +51,7 @@ const ChatPanel = (props: any) => {
           <>
             <div className={classes["header"]}>
               <UserHandle
-                id={userTo.id}
+                id={userTo.id - userTo.id - 1}
                 is_active={userTo.is_active}
                 img_url={userTo.img_url}
                 handle={userTo.handle}
